@@ -37,6 +37,9 @@ zephyr_library_include_directories(
     # miniz
     ../../external/miniz
     ../common/miniz
+
+    # zcbor
+    ../../external/zcbor/include
 )
 
 zephyr_library_sources(
@@ -97,6 +100,10 @@ endif()
 file(WRITE
   ${ZEPHYR_BINARY_DIR}/include/generated/golioth_ciphersuites.h
   "${ciphersuites_generated}")
+
+if(NOT DEFINED ZEPHYR_ZCBOR_MODULE_DIR)
+  set(ZEPHYR_ZCBOR_MODULE_DIR "../../external/zcbor")
+endif()
 
 if(CONFIG_ZCBOR)
   file(READ ${ZEPHYR_ZCBOR_MODULE_DIR}/zcbor/VERSION zcbor_version)
